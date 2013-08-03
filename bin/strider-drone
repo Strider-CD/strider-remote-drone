@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , path = require('path')
+  , _ = require('lodash')
+
+  , drone = require('../')
+
+  , config
+  , worker
+
+config = {
+  port: process.env.PORT || 7874,
+  host: process.env.HOST || 'localhost',
+  auth: process.env.AUTH || null
+}
+
+program
+  .version('0.0.1')
+  .option('-c, --config', 'Config file path.')
+  .option('-p, --port', 'Remote port')
+  .option('-h, --host', 'Remote host')
+  .option('-a, --auth', 'Authenication')
+  .parse(process.argv)
+
+if (program.config) {
+  _.extend(config, require(path.resolve(program.config)))
+}
+config.port = program.port || config.port
+config.host = program.host || config.host
+config.auth = program.auth || config.auth
+
+// here's where we'd do whatever authentication, encrypted sockets, whatever.
+drone.createSocket(config, function (client) {
+  console.log('Strider Drone ready')
+  worker = new drone.Worker(client, config)
+})
