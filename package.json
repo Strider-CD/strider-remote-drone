@@ -21,13 +21,13 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "chai": "~1.7.2",
-    "jshint": "~2.1.9",
-    "mocha": "~1.12.0",
+    "chai": "~3.5.0",
+    "jshint": "~2.9.4",
+    "mocha": "~3.2.0",
     "mockets": "~0.1.0"
   },
   "dependencies": {
     "sockemitter": "~0.3.0",
-    "async": "~0.2.9"
+    "async": "~2.1.4"
   }
 }
